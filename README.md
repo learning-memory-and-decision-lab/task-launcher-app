@@ -12,11 +12,25 @@ git clone https://github.com/brown-ccv/task-launcher-app
 ```
 cd task-launcher-app
 ```
-3. Install the dependencies (the -D flag installs the dev dependencies as well as the production ones)
+1. Install the dependencies
 ```
 npm install
 ```
 4. Run the app
 ```
 npm start
+```
+## Configuring Tasks
+
+1. Copy task logo to `/src/logos/` directory.
+
+2. Navigate to and open `/src/App.js`
+   
+3. Edit `tasks` array on the top of the file by adding or deleting json objects with the following format
+```
+{ 
+    name: "<task name>",
+    logoImport: import("./logos/<logo file name>"),
+    link: "<task website>",
+}
 ```
