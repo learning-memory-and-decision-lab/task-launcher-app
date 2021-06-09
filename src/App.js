@@ -1,41 +1,48 @@
 import React from "react";
 import TaskBox from "./components/TaskBox";
 
-import BeadsLogo from "./logos/beads.svg";
-import MsitLogo from "./logos/msit.svg";
-import ProvocationLogo from "./logos/provocation.svg"
-
-
+const tasks = [
+  {
+    name: "Beads",
+    logoImport: import("./logos/beads.svg"),
+    link: "https://borton-task-beads.web.app",
+  },
+  {
+    name: "MSIT",
+    logoImport: import("./logos/msit.svg"),
+    link: "https://borton-task-msit.web.app",
+  },
+  {
+    name: "Provocation",
+    logoImport: import("./logos/provocation.svg"),
+    link: "https://borton-task-provocation.web.app",
+  },
+];
 
 function App() {
-  let [, params] = window.location.href.split('/?')
+  let [, params] = window.location.href.split("/?");
 
   // append search paraments to a link
-  const appendToLink = (link) =>{
-    return `${link}/?${params}`
-  }
+  const appendToLink = (link) => {
+    return `${link}/?${params}`;
+  };
   return (
     <div style={{ backgroundColor: "#41464a" }}>
-      <div className="container p-6" >
-        
-        <h1 className="title is-1 is-flex is-justify-content-center has-text-white mb-6 pb-4">Tasks</h1>
-        <div style = {{ display: 'grid', gridTemplateColumns: '50% 50%' }}>
-            <TaskBox
-              name="Beads"
-              logo={BeadsLogo}
-              link={appendToLink('http://localhost:3000')} 
-            />
-            <TaskBox
-              name="MSIT"
-              logo={MsitLogo}
-              link={appendToLink('http://localhost:3000')}
-            />
-            <TaskBox
-              name="Provocation"
-              logo={ProvocationLogo}
-              link={appendToLink('http://localhost:3000')}
-            />
-            
+      <div className="container p-6" style={{ maxWidth: "1000px" }}>
+        <h1 className="title is-1 is-flex is-justify-content-center has-text-white mb-6 pb-4">
+          Tasks
+        </h1>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(400px, 2fr))" }}>
+          {tasks.map((task) => {
+            return (
+              <TaskBox
+                name={task.name}
+                key={task.name}
+                logoImport={task.logoImport}
+                link={appendToLink(task.link)}
+              />
+            );
+          })}
         </div>
       </div>
     </div>
