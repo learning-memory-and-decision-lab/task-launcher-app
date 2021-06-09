@@ -5,39 +5,37 @@ import BeadsLogo from "./logos/beads.svg";
 import MsitLogo from "./logos/msit.svg";
 import ProvocationLogo from "./logos/provocation.svg"
 
-function App() {
-  let query = new URLSearchParams(window.location.search);
-  const participantId = query.get("participantID");
-  const studyId = query.get("studyID");
 
+
+function App() {
+  let [, params] = window.location.href.split('/?')
+
+  // append search paraments to a link
+  const appendToLink = (link) =>{
+    return `${link}/?${params}`
+  }
   return (
     <div style={{ backgroundColor: "#41464a" }}>
       <div className="container p-6" >
+        
         <h1 className="title is-1 is-flex is-justify-content-center has-text-white mb-6 pb-4">Tasks</h1>
-        <div className="columns">
-          {/* Column 1 for tasks */}
-          <div className="column is-half">
-            {/* Boxes for tasks */}
+        <div style = {{ display: 'grid', gridTemplateColumns: '50% 50%' }}>
             <TaskBox
               name="Beads"
               logo={BeadsLogo}
-              link={`http://localhost:3000/?participantID=${participantId}&studyID=${studyId}`} 
+              link={appendToLink('http://localhost:3000')} 
+            />
+            <TaskBox
+              name="MSIT"
+              logo={MsitLogo}
+              link={appendToLink('http://localhost:3000')}
             />
             <TaskBox
               name="Provocation"
               logo={ProvocationLogo}
-              link={`http://localhost:3000/?participantID=${participantId}&studyID=${studyId}`}
+              link={appendToLink('http://localhost:3000')}
             />
-          </div>
-          {/* Column 2 for tasks */}
-          <div className="column is-half">
-            {/* Boxes for tasks */}
-            <TaskBox
-              name="MSIT"
-              logo={MsitLogo}
-              link={`http://localhost:3000/?participantID=${participantId}&studyID=${studyId}`}
-            />
-          </div>
+            
         </div>
       </div>
     </div>
