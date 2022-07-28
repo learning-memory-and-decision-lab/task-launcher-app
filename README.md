@@ -73,17 +73,17 @@ const tasks = [
 ];
 ```
 
-## GitHub deploy setup
+## GitHub setup
 
 This project uses GitHub Actions to automatically deploy code changes from GitHub to Firebase.
 
-There's existing tooling to make this easy.  Here are the [official docs](https://github.com/FirebaseExtended/action-hosting-deploy/blob/main/docs/service-account.md) and here's a quick summary.
+There's existing tooling to make this easy.  Here are the [official docs](https://github.com/FirebaseExtended/action-hosting-deploy/blob/main/docs/service-account.md), and here's a quick summary.  In a terminal:
 
-In a terminal:
  - install the [Firebase Command Line Tools](https://firebase.google.com/docs/cli): `npm install -g firebase-tools`
  - authenticate with firebase: `firebase login` and follow OAuth flow in browser
  - `cd` to this folder
- - generate deploy scripts for this app: `firebase init hosting:github --project nassar-task-launcher`
+ - generate deploy scripts for the app: `firebase init hosting:github --project nassar-task-launcher`
+ - Follow the prompts:
    - For which GitHub repository would you like to set up a GitHub workflow?: `learning-memory-and-decision-lab/task-launcher-app`
    - Set up the workflow to run a build script before every deploy?: `y`
    - What script should be run before every deploy?: `npm ci && npm run build`
@@ -92,31 +92,17 @@ In a terminal:
    - What is the name of the GitHub branch associated with your site's live channel?: `main`
    - The GitHub workflow file for deploying to the live channel already exists. Overwrite? firebase-hosting-merge.yml: `y`
 
+For the automatic deploys to work, enable actions on the GitHub repo.
+ - visit the repo on GitHub: https://github.com/learning-memory-and-decision-lab/task-launcher-app
+ - click the "Actions" tab
+ - click "I understand my workflows, go ahead and enable them"
 
+## First deploy
 
-Edit firebase-hosting-pull-request.yml and firebase-hosting-merge.yml
-projectId: hello-task-launcher
-
-Looks like I need a service account token like
-FIREBASE_SERVICE_ACCOUNT_BORTON_TASK_LAUNCHER
-looks like the Action thing documents how to set this up
-https://github.com/FirebaseExtended/action-hosting-deploy/blob/main/docs/service-account.md
-firebase init hosting:github
-benjamin-heasly/task-launcher-app
-✔  Created service account github-action-516788838 with Firebase Hosting admin permissions.
-✔  Uploaded service account JSON to GitHub as secret FIREBASE_SERVICE_ACCOUNT_HELLO_TASK_LAUNCHER.
-i  You can manage your secrets at https://github.com/benjamin-heasly/task-launcher-app/settings/secrets.
-accept defaults and overwrite existing github action scripts
-Enable actions on the repo
-
-I'll add my own app
-https://hello-honeycomb.web.app/
-I'll use my sweet tripledip logo!
-
-const tasks = [
-  {
-    name: "Hello",
-    logoImport: import("./logos/tripledip-logo.drawio.svg"),
-    link: "https://hello-honeycomb.web.app/",
-  }
-];
+With all that setup, the app should be ready to deploy.
+ - stage changes we just made in git: `git add .`
+ - review the changes: `git diff --staged`
+ - commit the changes: `git commit -m "Set up for Learning Memory and Decision Lab and Firebase deploys"`
+ - push and trigger the deploy: `git push`
+ - observe the deploy Action running at GitHub
+ - when the Actions are complete, visit the actual [landing page](https://nassar-task-launcher.web.app/)
