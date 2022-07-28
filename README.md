@@ -99,6 +99,13 @@ For the automatic deploys to work, enable actions on the GitHub repo.
 
 ## First deploy
 
+### update package metadata
+
+Let `npm` do a one-time update of package metadata in `package-lock.json`:
+ - `npm install`
+
+### commit and push
+
 With all that setup, the app should be ready to deploy.
  - stage changes we just made in git: `git add .`
  - review the changes: `git diff --staged`
@@ -106,3 +113,7 @@ With all that setup, the app should be ready to deploy.
  - push and trigger the deploy: `git push`
  - observe the deploy Action running at GitHub
  - when the Actions are complete, visit the actual [landing page](https://nassar-task-launcher.web.app/)
+
+## Future deploys
+
+From here, we'd expect that future pushes to this repo on GitHub will result in fresh deploys of the landing page, over on Firebase.
