@@ -1,10 +1,12 @@
 # task-launcher-app
 
-This repository is for a landing page app with links/buttons to go to tasks for the Brown [Learning Memory and Decision Lab](https://sites.brown.edu/mattlab/).  It's based on the [task-launcher-app](https://github.com/brown-ccv/task-launcher-app) created by the Brown Center for [Computation and Visualization](https://ccv.brown.edu/).
+This repository is for a landing page app with links/buttons to go to tasks for the Brown [Learning Memory and Decision Lab](https://sites.brown.edu/mattlab/).  It's based on the [task-launcher-app](https://github.com/brown-ccv/task-launcher-app) created by the Brown [Center for Computation and Visualization](https://ccv.brown.edu/).
 
 # Configuring Tasks
 
-To add a new task to the landing page, clone this repository, make a few edits (described below), and push the changes back up (or make a pull request).  The [landing page](https://nassar-task-launcher.web.app/) will be automatically re-deployed with the changes you made.
+To add a new task to the landing page, clone this repository, make a few small edits, and push the changes back up (or make a pull request).  The [landing page](https://nassar-task-launcher.web.app/) will be automatically re-deployed with the changes you made.
+
+The changes you need to make are to add a logo, and add task info.
 
 ## add logo
 Copy the task logo into the `/src/logos/` directory.
@@ -20,25 +22,27 @@ Navigate to and open `/src/App.js`.  Edit the `tasks` array on the top of the fi
 }
 ```
 
-# Setup
+# Inital Setup with Firebase and GitHub
 
-This section contains the steps that were used to set up the landing page for the Learning Memory and Decision Lab, starting from the original [task-launcher-app](https://github.com/brown-ccv/task-launcher-app) repo created by Brown CCV.
+This section lists out the steps that were used to set up the landing page for the Learning Memory and Decision Lab, starting from the original [task-launcher-app](https://github.com/brown-ccv/task-launcher-app) repo from Brown CCV.
+
+Everything below here should be one-time setup that's already done.  It's included for those who are interested, and those who might want to do something similar!
 
 ## Firebase setup
 
 The landing page is hosted at Google Firebase.  Here's how we set up the Firebase part:
 
- - create a Firebase project called "nassar-task-launcher"
- - visist the [Firebase console for this project](https://console.firebase.google.com/project/nassar-task-launcher/overview)
+ - create a Firebase project called `nassar-task-launcher`
+ - visit the [Firebase console for this project](https://console.firebase.google.com/project/nassar-task-launcher/overview)
  - click the `</>` button to add a new "Web" app
  - name the app `nassar-task-launcher`, same as the project
  - check yes, to "Also set up Firebase Hosting for this app"
  - click "Register App"
- - click the rest of the way through, through "Next", and "Continue to console"
+ - click the rest of the way through, including "Next" and "Continue to console"
 
 ## Edits to the app code
 
-Here's how we modified the app code in this repo to integrate with Firebase.
+Here's how we modified the app code in this repo.
 
 ### edit `.firebaserc`
 
@@ -75,9 +79,9 @@ const tasks = [
 
 ## GitHub setup
 
-This project uses GitHub Actions to automatically deploy code changes from GitHub to Firebase.
+This project uses GitHub Actions to automatically deploy code changes from GitHub to Firebase.  There's existing tooling to make this easy.  Here are the [official docs](https://github.com/FirebaseExtended/action-hosting-deploy/blob/main/docs/service-account.md).
 
-There's existing tooling to make this easy.  Here are the [official docs](https://github.com/FirebaseExtended/action-hosting-deploy/blob/main/docs/service-account.md), and here's a quick summary.  In a terminal:
+And now here's a quick summary.  In a terminal:
 
  - install the [Firebase Command Line Tools](https://firebase.google.com/docs/cli): `npm install -g firebase-tools`
  - authenticate with firebase: `firebase login` and follow OAuth flow in browser
@@ -111,9 +115,9 @@ With all that setup, the app should be ready to deploy.
  - review the changes: `git diff --staged`
  - commit the changes: `git commit -m "Set up for Learning Memory and Decision Lab and Firebase deploys"`
  - push and trigger the deploy: `git push`
- - observe the deploy Action running at GitHub
+ - observe the [deploy Action](https://github.com/learning-memory-and-decision-lab/task-launcher-app/actions) running at GitHub
  - when the Actions are complete, visit the actual [landing page](https://nassar-task-launcher.web.app/)
 
 ## Future deploys
 
-From here, we'd expect that future pushes to this repo on GitHub will result in fresh deploys of the landing page, over on Firebase.
+From here, future deploys should be automated.  Each push to the repo on GitHub (or PR merge to the `main` branch) will result in a fresh deploy of the landing page over on Firebase.
