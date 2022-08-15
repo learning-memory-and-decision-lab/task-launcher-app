@@ -22,6 +22,19 @@ Navigate to and open `/src/App.js`.  Edit the `tasks` array on the top of the fi
 }
 ```
 
+## push changes
+That's all there is to it, so now push those repo changes back here to GitHub.
+
+```
+git add .
+git commit -m "Added a new logo and task entry for my awesome new task."
+git push
+```
+
+As soon as the changes are pushed, GitHub will kick off an "Action" to redeploy the task launcher to Firebase Hosting.  Follow the progress of the Action [here](https://github.com/learning-memory-and-decision-lab/task-launcher-app/actions).  View the task launcher itself [here](https://nassar-task-launcher.web.app/).
+
+After that you should be done.  Read on below if you want to learn more about how this was set up.
+
 # Inital Setup with Firebase and GitHub
 
 This section lists out the steps that were used to set up the landing page for the Learning Memory and Decision Lab, starting from the original [task-launcher-app](https://github.com/brown-ccv/task-launcher-app) repo from Brown CCV.
